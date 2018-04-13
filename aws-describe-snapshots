@@ -5,5 +5,5 @@
 # ======================================================================
 
 AWSPROFILE="default"
-aws ec2 --profile $AWSPROFILE describe-snapshots --owners $(cat owners)
+aws ec2 --profile $AWSPROFILE describe-snapshots --owner-ids $(cat owners)
 
