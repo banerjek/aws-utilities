@@ -1,9 +1,9 @@
 # aws-utilities
 Utilities to manage EC2 and S3 assets
 
-aws-associate-address associate public IP with EC2 instance, remapping if already in use
-aws-describe-snapshots	Limit snapshot list by owner
-aws-list-images	describe snapshots and images limited by owner	
-aws-resize-volume	shut down instance, resize EBS backed root partition, reattach, and restart
-aws-start-prod	start production instance	
-aws-stop-instances	stop all instances
+aws-associate-address associate public IP with EC2 instance, remapping if already in use<br />
+aws-describe-snapshots	Limit snapshot list by owner<br />
+aws-list-images	describe snapshots and images limited by owner<br />	
+aws-resize-volume	shut down instance, resize EBS backed root partition, reattach, and restart<br />
+aws-start-prod	start production instance	<br />
+aws-stop-instances	stop all instances<br />
