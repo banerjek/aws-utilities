@@ -1,19 +1,30 @@
 #!/usr/bin/bash
 #
+# This script shuts down a running instance (also works with a stopped
+# one), extracts information from it, and resizes the EBS based root
+# partition to the size variable which must be larger or equal to the
+# current size.
+#
+# It is recommended to tee standard out from this script to another file
+# in case something goes wrong
+#
+# Note that it does not delete the old volume or snapshots -- you must
+# do this manually after verifying that everything works
 # ======================================================================
-
 
 # May need to run sudo resize2fs /dev/xvda1 on box after reconnecting
 AWSPROFILE="default"
 
 # dev-instance and dev-ip are one line files
 # containing instance and public IP values
-instance_id=$(cat dev-instance)
-public_ip=$(cat dev-ip)
+# size is in GB
+instance_id=$(cat prod-instance)
+public_ip=$(cat prod-ip)
 size="300"
 
 region="us-west-2"
 
+# Get some info to use for later commands
 root_device=$(aws ec2 describe-instances \
   --region $region \
   --instance-ids $instance_id \
@@ -37,6 +48,7 @@ echo "instance $instance_id in $zone with original volume $old_volume_id"
 aws ec2 stop-instances \
   --region $region \
   --instance-ids $instance_id
+
 aws ec2 wait instance-stopped \
   --region $region \
   --instance-ids $instance_id
@@ -52,6 +64,7 @@ snapshot_id=$(aws ec2 create-snapshot \
   --volume-id $old_volume_id \
   --output text \
   --query 'SnapshotId')
+
 aws ec2 wait snapshot-completed \
   --region $region \
   --snapshot-ids $snapshot_id
@@ -65,6 +78,7 @@ new_volume_id=$(aws ec2 create-volume \
   --snapshot $snapshot_id \
   --output text \
   --query 'VolumeId')
+
 aws ec2 wait volume-available --volume-ids $new_volume_id
 echo "new volume: $new_volume_id"
 
@@ -74,6 +88,7 @@ aws ec2 attach-volume \
   --instance $instance_id \
   --device $root_device \
   --volume-id $new_volume_id
+
 aws ec2 wait volume-in-use \
   --region $region \
   --volume-ids $new_volume_id
@@ -82,9 +97,11 @@ aws ec2 wait volume-in-use \
 aws ec2 start-instances \
   --region $region \
   --instance-ids $instance_id
+
 aws ec2 wait instance-running \
   --region $region \
   --instance-ids $instance_id
+
 aws ec2 describe-instances \
   --region $region \
   --instance-ids $instance_id
