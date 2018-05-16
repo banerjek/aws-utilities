@@ -1,9 +1,9 @@
-#!/usr/bin/bash
+#!/bin/bash
 #
 # owners is plain text file containing owner ID. Skip
 # this switch if assets you search only involve one owner
 # ======================================================================
 
 AWSPROFILE="default"
-aws ec2 --profile $AWSPROFILE describe-snapshots --owner-ids $(cat owners)
+aws ec2 --profile $AWSPROFILE describe-snapshots --owner-ids $(cat owners) | tee snapshots.json
 

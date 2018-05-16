@@ -1,7 +1,6 @@
-#!/usr/bin/bash
+#!/bin/bash
 #
 # ======================================================================
 
 AWSPROFILE="default"
-# dev 
-aws ec2 --profile $AWSPROFILE associate-address --instance-id $(cat prod-instance) --public-ip $(cat prod-ip) --allow-reassociation # --dry-run 
+aws ec2 --profile $AWSPROFILE associate-address --instance-id $(cat stage-instance) --public-ip $(cat stage-ip) --allow-reassociation # --dry-run 

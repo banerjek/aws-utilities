@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 #
 #i dev-instance, stage-instance, and prod-instance contain instance IDs
 # for those instances

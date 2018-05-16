@@ -1,0 +1,6 @@
+#!/bin/bash
+# ======================================================================
+
+AWSPROFILE="default"
+aws ec2 --profile $AWSPROFILE list-users
+

@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+# /usr/local/bin/library-archive for libaws.ohsu.edu
+#
+# copies (via s3 sync) a directory tree to the named BUCKET
+# at AWS, encrypting the data at rest using $KEYID. only users
+# given access to the key may employ this script.
+#
+# the underlying s3 bucket has a two-day lifecycle-transition
+# policy. files copied up on a Monday will be transitioned to
+# AWS Glacier storage on the following Wednesday.
+#
+# Please contact acc@ohsu.edu for script maintenance.
+#
+# ======================================================================
+
+AWSPROFILE="default"
+aws ec2 --profile $AWSPROFILE run-instances --image-id ami-c01881b8 --count 1 --instance-type t2.xlarge --key-name heinlein-rsa --security-group-ids sg-6b842a17 --subnet-id subnet-57ddff31 --tag-specifications 'ResourceType=volume,Tags=[{Key=name,Value=samvera-dev},{Key=Administrator,Value=acc@ohsu.edu},{Key=Customer,Value=forero@ohsu.edu}]' # --dry-run 

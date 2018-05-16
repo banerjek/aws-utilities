@@ -1,0 +1,6 @@
+#!/bin/bash
+#
+# ======================================================================
+
+AWSPROFILE="default"
+aws ec2 --profile $AWSPROFILE modify-instance-attribute --instance-id $(cat stage-instance) --groups sg-6b842a17 

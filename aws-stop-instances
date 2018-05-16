@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 #
 # catted files contain instance IDs
 # ======================================================================

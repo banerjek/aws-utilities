@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 #
 # This script shuts down a running instance (also works with a stopped
 # one), extracts information from it, and resizes the EBS based root
