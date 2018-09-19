@@ -1,0 +1,5 @@
+#!/bin/bash
+# ======================================================================
+
+AWSPROFILE="default"
+aws ec2 --profile $AWSPROFILE deregister-image --image-id ami-c01881b8 
