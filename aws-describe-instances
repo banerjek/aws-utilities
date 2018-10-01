@@ -6,5 +6,5 @@
 # ======================================================================
 
 AWSPROFILE="default"
-aws ec2 --profile $AWSPROFILE describe-instances --instance-ids $(cat dev-instance) $(cat stage-instance) $(cat prod-instance) |tee instances.json
+aws ec2 --profile $AWSPROFILE describe-instances --filters "Name=owner-id,Values=$(cat owners)" |tee instances.json
 
