@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+# owners is plain text file continaing owner ID
+# this switch can be omitted if the account only deal with one owner
+# ======================================================================
+AWSPROFILE="default"
+#aws --profile $AWSPROFILE s3 cp $1 $BUCKET/$1
+aws emr list-instances --cluster-id --no-paginate  | tee instances.json
+
