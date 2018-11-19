@@ -5,6 +5,6 @@
 # ======================================================================
 AWSPROFILE="default"
 #aws --profile $AWSPROFILE s3 cp $1 $BUCKET/$1
-aws ec2 --profile $AWSPROFILE describe-images --owners $(cat owners) > tee images.json
+aws ec2 --profile $AWSPROFILE describe-images --owners $(cat owners) > images.json
 cat images.json |jq -r '.Images[] | [.Description, .Name, .ImageId] | @tsv'
 
