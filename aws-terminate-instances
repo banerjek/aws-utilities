@@ -1,5 +1,18 @@
 #!/bin/bash
+#
+# /usr/local/bin/library-archive for libaws.ohsu.edu
+#
+# copies (via s3 sync) a directory tree to the named BUCKET
+# at AWS, encrypting the data at rest using $KEYID. only users
+# given access to the key may employ this script.
+#
+# the underlying s3 bucket has a two-day lifecycle-transition
+# policy. files copied up on a Monday will be transitioned to
+# AWS Glacier storage on the following Wednesday.
+#
+# Please contact acc@ohsu.edu for script maintenance.
+#
 # ======================================================================
 
 AWSPROFILE="default"
-aws ec2 --profile $AWSPROFILE terminate-instances --instance-id i-075f0f15b0013fc36 
+aws ec2 --profile $AWSPROFILE terminate-instances --instance-id i-0b9c10d1bcf110170 

@@ -1,0 +1,1 @@
+aws --profile default ec2 create-image --instance-id $(cat dev-instance)  --name samvera-dev-$(date +%Y%m%d)  --description samvera-dev-$(date +%Y%m%d)
