@@ -6,4 +6,5 @@
 AWSPROFILE="default"
 #aws --profile $AWSPROFILE s3 cp $1 $BUCKET/$1
 aws ec2 --profile $AWSPROFILE describe-images --owners $(cat owners) | tee images.json
+cat images.json |jq '.Images[]' | jq -r '[.ImageId, .CreationDate, .Name, .Description] | @tsv'
 
