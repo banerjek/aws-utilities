@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+#i dev-instance, stage-instance, and prod-instance contain instance IDs
+# for those instances
+#
+# ======================================================================
+
+AWSPROFILE="default"
+#aws ec2 --profile $AWSPROFILE describe-instances --instance-ids $(cat dev-instance) $(cat stage-instance) $(cat prod-instance) |tee instances.json
+aws ec2 --profile $AWSPROFILE describe-images --owners $(cat owners) |tee images.json
+cat images.json |jq '.Images[]' | jq -r '[.ImageId, .ImageId, .Name, .Description] | @tsv'
+

@@ -1,9 +1,11 @@
 #!/bin/bash
 #
-# owners is plain text file containing owner ID. Skip
-# this switch if assets you search only involve one owner
+#i dev-instance, stage-instance, and prod-instance contain instance IDs
+# for those instances
+#
 # ======================================================================
 
 AWSPROFILE="default"
-aws ec2 --profile $AWSPROFILE describe-snapshots --owner-ids $(cat owners) | tee snapshots.json
+aws ec2 --profile $AWSPROFILE describe-snapshots --owner-ids $(cat owners) |tee snapshots.json
+cat snapshots.json |jq '.Snapshots[]' | jq -r '[.SnapshotId, .StartTime, .State, .Description] | @tsv'
 
