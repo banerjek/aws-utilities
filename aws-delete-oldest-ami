@@ -7,5 +7,6 @@ AMI="$(echo $LINE | awk '{print $1}')"
 SNAPSHOT="$(echo $LINE | awk '{print $2}')"
 
 aws ec2 --profile default deregister-image --image-id ${AMI}
+sleep 300
 aws ec2 --profile $AWSPROFILE delete-snapshot --snapshot-id ${SNAPSHOT}
 
