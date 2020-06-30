@@ -2,12 +2,10 @@
 # ======================================================================
 
 LINE="$(aws ec2 --profile default describe-images --owners $(cat owners) | jq -r '.Images[] | select(.Name|test("samvera-prod")) | [(.ImageId, .BlockDeviceMappings[].Ebs.SnapshotId, .Name, .Description)] | @tsv' | sort -k2 | head -1 | cut -f1,2)"
-echo $LINE
-AMI="$(echo $LINE | awk '{print $2}')"
-COMMAND="aws ec2 --profile default deregister-image --image-id ${AMI}"
-echo ${COMMAND}
 
+AMI="$(echo $LINE | awk '{print $2}')"
 SNAPSHOT="$(echo $LINE | awk '{print $2}')"
-COMMAND="aws ec2 --profile $AWSPROFILE delete-snapshot --snapshot-id ${SNAPSHOT}"
-echo ${COMMAND}
+
+aws ec2 --profile default deregister-image --image-id ${AMI}
+aws ec2 --profile $AWSPROFILE delete-snapshot --snapshot-id ${SNAPSHOT}
 
