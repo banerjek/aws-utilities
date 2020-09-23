@@ -15,8 +15,12 @@
 # ======================================================================
 
 # Define destination AWS S3 bucket.
-BUCKET="ohsu-library-lt-archive"
-
+#BUCKET="ohsu-library-public"
+BUCKET="ohsu-library-bepress"
+# Define AWS customer key used to encrypt data at rest.
+#KEYID="arn:aws:kms:us-west-2:608317227044:alias/lt-archive"
+KEYID="arn:aws:s3:::ohsu-library-bepress"
 # Define command-line profile to use in aws CLI operations.
 AWSPROFILE="default"
-aws --profile $AWSPROFILE s3api put-bucket-lifecycle --bucket $BUCKET --lifecycle-configuration file://lifecycle.json 
+#aws --profile $AWSPROFILE s3api get-object-acl --bucket $BUCKET --key $1 
+aws --profile $AWSPROFILE s3api get-object-acl --bucket $BUCKET 

@@ -19,4 +19,4 @@ BUCKET="ohsu-library-lt-archive"
 
 # Define command-line profile to use in aws CLI operations.
 AWSPROFILE="default"
-aws --profile $AWSPROFILE s3api put-bucket-lifecycle --bucket $BUCKET --lifecycle-configuration file://lifecycle.json 
+aws --profile $AWSPROFILE s3api get-object-acl --bucket $BUCKET --key $1
