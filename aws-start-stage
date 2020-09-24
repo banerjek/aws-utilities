@@ -1,19 +1,10 @@
 #!/bin/bash
 #
-
 #
-
-
-
 #
-
-
-
 #
-
 #
 # ======================================================================
-
 AWSPROFILE="default"
 # stage 
 aws ec2 --profile $AWSPROFILE start-instances --instance-id $(cat stage-instance) 

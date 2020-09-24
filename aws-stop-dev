@@ -1,19 +1,10 @@
 #!/bin/bash
 #
-
 #
-
-
-
 #
-
-
-
 #
-
 #
 # ======================================================================
-
 AWSPROFILE="default"
 # dev
 aws ec2 --profile $AWSPROFILE stop-instances --instance-id $(cat dev-instance) 

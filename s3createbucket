@@ -1,19 +1,11 @@
 #!/bin/bash
 #
-
 #
 # copies (via s3 sync) a directory tree to the named $BUCKET
-
-
 #
-
-
-
 #
-
 #
 # ======================================================================
-
 # Define command-line profile to use in aws CLI operations.
 AWSPROFILE="default"
 echo "aws --profile $AWSPROFILE s3api create-bucket --bucket ohsu-library-public-repository --region us-west-2 --create-bucket-configuration LocationConstraint=us-west-2"

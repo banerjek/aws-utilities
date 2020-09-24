@@ -1,26 +1,17 @@
 #!/bin/bash
 #
-
 #
 # copies (via s3 sync) a directory tree to the named $BUCKET
-
-
 #
-
-
-
 #
-
 #
 # ======================================================================
-
 # Define destination AWS S3 bucket.
 BUCKET="s3://ohsu-library-lt-archive"
 # Define AWS customer key used to encrypt data at rest.
 KEYID="arn:aws:kms:us-west-2:608317227044:alias/lt-archive"
 # Define command-line profile to use in aws CLI operations.
 AWSPROFILE="default"
-
 SRCDIR="/mnt/libnas1/Glacier/archive/"
 WORKDIR="/mnt/libnas1/Glacier/workspace"
 SUCCESSLOG="$WORKDIR/success.log"
@@ -29,8 +20,6 @@ HASDOI="$WORKDIR/hasdoi/"
 NEEDSDOI="$WORKDIR/needsdoi/"
 EZIDAUTH="ohsu_libr:wednes04day"
 DOIPREFIX="10.6083"
-
-
 # We made it this far? OK, full steam ahead!
 aws --profile $AWSPROFILE s3 sync \
   --sse aws:kms \

@@ -1,18 +1,9 @@
 #!/bin/bash
 #
-
 #
-
-
-
 #
-
-
-
 #
-
 #
 # ======================================================================
-
 AWSPROFILE="default"
 aws ec2 --profile $AWSPROFILE disassociate-address --association-id vpc-5dcb2d24 --public-ip 34.209.202.103 --dry-run 

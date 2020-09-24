@@ -11,65 +11,53 @@
 # Note that it does not delete the old volume or snapshots -- you must
 # do this manually after verifying that everything works
 # ======================================================================
-
 # May need to run sudo resize2fs /dev/xvda1 on box after reconnecting
 AWSPROFILE="default"
-
 # dev-instance and dev-ip are one line files
 # containing instance and public IP values
 # size is in GB
 instance_id=$(cat prod-instance)
 public_ip=$(cat prod-ip)
 size="300"
-
 region="us-west-2"
-
 # Get some info to use for later commands
 root_device=$(aws ec2 describe-instances \
   --region $region \
   --instance-ids $instance_id \
   --output text \
   --query 'Reservations[*].Instances[*].RootDeviceName')
-
 old_volume_id=$(aws ec2 describe-instances \
   --region $region \
   --instance-ids $instance_id \
   --output text \
   --query 'Reservations[*].Instances[*].BlockDeviceMappings[?DeviceName==`'$root_device'`].[Ebs.VolumeId]')
-
 zone=$(aws ec2 describe-instances \
   --region $region \
   --instance-ids $instance_id \
   --output text \
   --query 'Reservations[*].Instances[*].Placement.AvailabilityZone')
-
 echo "instance $instance_id in $zone with original volume $old_volume_id"
 # Stop instance
 aws ec2 stop-instances \
   --region $region \
   --instance-ids $instance_id
-
 aws ec2 wait instance-stopped \
   --region $region \
   --instance-ids $instance_id
-
 # Detach the original volume from the instance (make sure it is stopped)
 aws ec2 detach-volume \
   --region $region \
   --volume-id $old_volume_id
-
 # Create a snapshot of the original volume
 snapshot_id=$(aws ec2 create-snapshot \
   --region $region \
   --volume-id $old_volume_id \
   --output text \
   --query 'SnapshotId')
-
 aws ec2 wait snapshot-completed \
   --region $region \
   --snapshot-ids $snapshot_id
 echo "snapshot: $snapshot_id"
-
 # Create a new volume from the snapshot, specifying a larger size
 new_volume_id=$(aws ec2 create-volume \
   --region $region \
@@ -78,33 +66,26 @@ new_volume_id=$(aws ec2 create-volume \
   --snapshot $snapshot_id \
   --output text \
   --query 'VolumeId')
-
 aws ec2 wait volume-available --volume-ids $new_volume_id
 echo "new volume: $new_volume_id"
-
 # Attach the new volume to the instance
 aws ec2 attach-volume \
   --region $region \
   --instance $instance_id \
   --device $root_device \
   --volume-id $new_volume_id
-
 aws ec2 wait volume-in-use \
   --region $region \
   --volume-ids $new_volume_id
-
 # Start the instance
 aws ec2 start-instances \
   --region $region \
   --instance-ids $instance_id
-
 aws ec2 wait instance-running \
   --region $region \
   --instance-ids $instance_id
-
 aws ec2 describe-instances \
   --region $region \
   --instance-ids $instance_id
-
 # Associate IP address
 aws ec2 associate-address --instance-id $instance_id --public-ip $public_ip

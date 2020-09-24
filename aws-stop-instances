@@ -2,7 +2,6 @@
 #
 # catted files contain instance IDs
 # ======================================================================
-
 AWSPROFILE="default"
 #aws ec2 --profile $AWSPROFILE stop-instances --instance-id $(cat dev-instance) 
 aws ec2 --profile $AWSPROFILE stop-instances --instance-id $(cat stage-instance) 

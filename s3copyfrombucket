@@ -1,19 +1,10 @@
 #!/bin/bash
 #
-
 #
-
-
-
 #
-
-
-
 #
-
 #
 # ======================================================================
-
 # Define destination AWS S3 bucket.
 PUBLICBUCKET="s3://ohsu-library-public"
 PRIVATEBUCKET="s3://ohsu-library-lt-archive"

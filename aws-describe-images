@@ -4,8 +4,6 @@
 # for those instances
 #
 # ======================================================================
-
 AWSPROFILE="default"
 aws ec2 --profile $AWSPROFILE describe-images --owners $(cat owners) > images.json
 cat images.json |jq '.Images[]' | jq -r '[.ImageId, .Name, .Description, .State] | @tsv'
-

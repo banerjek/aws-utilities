@@ -1,23 +1,14 @@
 #!/bin/bash
 #
-
 #
 # copies (via s3 sync) a directory tree to the named $BUCKET
-
-
 #
-
-
-
 #
-
 #
 # ======================================================================
-
 # Define destination AWS S3 bucket.
 #BUCKET="ohsu-library-lt-archive"
 BUCKET="ohsu-library-public"
-
 # Define command-line profile to use in aws CLI operations.
 AWSPROFILE="default"
 aws --profile $AWSPROFILE s3api delete-object --bucket $BUCKET --key $1

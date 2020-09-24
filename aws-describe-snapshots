@@ -4,8 +4,6 @@
 # for those instances
 #
 # ======================================================================
-
 AWSPROFILE="default"
 aws ec2 --profile $AWSPROFILE describe-snapshots --owner-ids $(cat owners) |tee snapshots.json
 cat snapshots.json |jq '.Snapshots[]' | jq -r '[.SnapshotId, .StartTime, .State, .Description] | @tsv'
-

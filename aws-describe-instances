@@ -4,10 +4,8 @@
 # for those instances
 #
 # ======================================================================
-
 AWSPROFILE="default"
 #aws ec2 --profile $AWSPROFILE describe-instances --instance-ids $(cat dev-instance) $(cat stage-instance) $(cat prod-instance) |tee instances.json
 aws ec2 --profile $AWSPROFILE describe-instances --instance-ids $(cat prod-instance) 
 ##aws ec2 --profile $AWSPROFILE describe-instances > instances.json
 #cat instances.json |jq '.Reservations[].Instances[]' | jq -r '[.InstanceId, .ImageId, .State.Name, .LaunchTime, .PublicIpAddress] | @tsv'
-

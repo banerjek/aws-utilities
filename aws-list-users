@@ -1,19 +1,10 @@
 #!/bin/bash
 #
-
 #
-
-
-
 #
-
-
-
 #
-
 #
 # ======================================================================
-
 AWSPROFILE="default"
 #aws --profile $AWSPROFILE s3 cp $1 $BUCKET/$1
 # all
@@ -22,4 +13,3 @@ AWSPROFILE="default"
 #aws ec2 --profile $AWSPROFILE describe-instances --instance-ids i-0017dff820c15f401
 # stage
 aws ec2 --profile $AWSPROFILE list-users
-
