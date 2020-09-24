@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# /usr/local/bin/library-archive for libaws.ohsu.edu
+
 # ======================================================================
 
 # Define destination AWS S3 bucket.
