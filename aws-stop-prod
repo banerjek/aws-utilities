@@ -1,5 +1,4 @@
 #!/bin/bash
-#
 # catted files contain instance IDs
 # ======================================================================
 AWSPROFILE="default"

@@ -1,8 +1,6 @@
 #!/bin/bash
-#
 #i dev-instance, stage-instance, and prod-instance contain instance IDs
 # for those instances
-#
 # ======================================================================
 AWSPROFILE="default"
 aws ec2 --profile $AWSPROFILE describe-images --owners $(cat owners) > images.json

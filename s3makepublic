@@ -1,10 +1,5 @@
 #!/bin/bash
-#
-#
 # copies (via s3 sync) a directory tree to the named $BUCKET
-#
-#
-#
 # ======================================================================
 # Define destination AWS S3 bucket.
 BUCKET="ohsu-library-public"

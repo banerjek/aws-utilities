@@ -1,5 +1,4 @@
 #!/bin/bash
-#
 # owners is plain text file continaing owner ID
 # this switch can be omitted if the account only deal with one owner
 # ======================================================================

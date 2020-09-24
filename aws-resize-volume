@@ -1,13 +1,10 @@
 #!/bin/bash
-#
 # This script shuts down a running instance (also works with a stopped
 # one), extracts information from it, and resizes the EBS based root
 # partition to the size variable which must be larger or equal to the
 # current size.
-#
 # It is recommended to tee standard out from this script to another file
 # in case something goes wrong
-#
 # Note that it does not delete the old volume or snapshots -- you must
 # do this manually after verifying that everything works
 # ======================================================================

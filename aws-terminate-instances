@@ -1,9 +1,4 @@
 #!/bin/bash
-#
-#
-#
-#
-#
 # ======================================================================
 AWSPROFILE="default"
 aws ec2 --profile $AWSPROFILE terminate-instances --instance-id $(cat prod-instance)

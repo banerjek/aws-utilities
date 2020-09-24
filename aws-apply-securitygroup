@@ -1,9 +1,4 @@
 #!/bin/bash
-#
-#
-#
-#
-#
 # ======================================================================
 AWSPROFILE="default"
 aws ec2 --profile $AWSPROFILE modify-instance-attribute --instance-id i-0feb3d2170d7d734e --groups sg-6b842a17 

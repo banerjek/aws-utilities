@@ -1,9 +1,4 @@
 #!/bin/bash
-#
-#
-#
-#
-#
 # ======================================================================
 AWSPROFILE="default"
 aws ec2 --profile $AWSPROFILE run-instances --image-id  $(cat prod-ami) --count 1 --instance-type t2.xlarge --key-name heinlein-rsa --security-group-ids sg-6b842a17 --subnet-id subnet-57ddff31 --tag-specifications 'ResourceType=volume,Tags=[{Key=name,Value=samvera-prod},{Key=Administrator,Value=acc@ohsu.edu},{Key=Customer,Value=forero@ohsu.edu}]' # --dry-run 
