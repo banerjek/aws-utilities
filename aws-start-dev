@@ -10,10 +10,10 @@
 # policy. files copied up on a Monday will be transitioned to
 # AWS Glacier storage on the following Wednesday.
 #
-# Please contact acc@ohsu.edu for script maintenance.
+
 #
 # ======================================================================
 
 AWSPROFILE="default"
 # dev
-aws ec2 --profile $AWSPROFILE start-instances --instance-id i-00905802b49e0595d 
+aws ec2 --profile $AWSPROFILE start-instances --instance-id $(cat dev-instance)

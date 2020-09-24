@@ -1,0 +1,1 @@
+aws --profile default ec2 create-image --instance-id $(cat stage-instance)  --name samvera-production-$(date +%Y%m%d)_needsConfig  --description 'Stage machine after volume unmounted' 
