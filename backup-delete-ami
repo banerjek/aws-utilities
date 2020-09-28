@@ -1,0 +1,15 @@
+SHELL=/bin/bash
+PATH=/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/banerjek/.local/bin:/home/banerjek/bin
+LANG=C.UTF-8
+SHLVL=1
+HOME=/home/banerjek
+
+LINE="$(aws ec2 --profile default describe-images --owners $(cat owners) | jq -r '.Images[] | select(.Name|test("samvera-prod")) | [(.ImageId, .BlockDeviceMappings[].Ebs.SnapshotId, .Name, .Description)] | @tsv' | sort -k2 | head -1 | cut -f1,2)"
+
+AMI="$(echo $LINE | awk '{print $1}')"
+SNAPSHOT="$(echo $LINE | awk '{print $2}')"
+
+aws ec2 --profile default deregister-image --image-id ${AMI}
+sleep 300
+aws ec2 --profile default delete-snapshot --snapshot-id ${SNAPSHOT}
+
